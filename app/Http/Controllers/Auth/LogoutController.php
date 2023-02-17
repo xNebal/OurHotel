@@ -19,6 +19,6 @@ class LogoutController extends Controller
     {
         Session::flush();
         Auth::logout();
-        return view('Home');
+        return view('index');
     }
 }

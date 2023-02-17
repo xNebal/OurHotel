@@ -16,12 +16,20 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $userType)
     {
-        if(auth()->user()->type == $userType){
-            return $next($request);
+        if(auth()->user()->type == 1){
+            return response()->view('adminhome');
         }
-
+        if(auth()->user()->type == 2){
+            return response()->view('reservation_emphome');
+        }
+        if(auth()->user()->type == 3){
+            return response()->view('kitchen_emphome');
+        }
+        if(auth()->user()->type == 0){
+            return response()->view('home');
+        }
         //return response()->json(['You do not have permission to access for this page.']);
         //return response()->route('/logout');
-         return response()->view('logout');
+        else return response()->view('login');
     }
 }
