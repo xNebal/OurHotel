@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+/*sign up */
+//Route::post('/create','App\Http\Controllers\RegisterController@create');
+Route::post('create', [App\Http\Controllers\Auth\RegisterController::class, 'create']);
+
 
 Route::group(['middleware' => ['auth']], function() {
     /**

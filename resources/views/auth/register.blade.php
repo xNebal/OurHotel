@@ -8,14 +8,14 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="/create">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="full name" class="col-md-4 col-form-label text-md-end">{{ __('full name') }}</label>
+                            <label for="full_name" class="col-md-4 col-form-label text-md-end">{{ __('Full name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="full name" type="text" class="form-control @error('full name') is-invalid @enderror" name="full name" value="{{ old('full name') }}" required autocomplete="full name" autofocus>
+                                <input id="full_name" type="text" class="form-control @error('full_name') is-invalid @enderror" name="full_name" value="{{ old('full_name') }}" required autocomplete="full_name" autofocus>
 
                                 @error('full name')
                                     <span class="invalid-feedback" role="alert">
