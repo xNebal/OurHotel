@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\UserType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,7 @@ Route::group(['middleware' => ['auth']], function() {
 All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:user'])->group(function () {
+Route::middleware(['auth', 'user-access:'.UserType::CLIENT])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
@@ -47,7 +49,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
+Route::middleware(['auth', 'user-access:'.UserType::ADMIN])->group(function () {
 
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 });
