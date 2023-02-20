@@ -59,7 +59,7 @@ Route::middleware(['auth', 'user-access:'.UserType::ADMIN])->group(function () {
 All reservation_emp Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:reservation_emp'])->group(function () {
+Route::middleware(['auth', 'user-access'.UserType::RESERVATION_EMP])->group(function () {
 
     Route::get('/reservation_emp/home', [HomeController::class, 'reservation_empHome'])->name('reservation_emp.home');
 });
@@ -69,7 +69,7 @@ Route::middleware(['auth', 'user-access:reservation_emp'])->group(function () {
 All kitchen_emp Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:kitchen_emp'])->group(function () {
+Route::middleware(['auth', 'user-access'.UserType::KITCHEN_EMP])->group(function () {
 
     Route::get('/kitchen_emp/home', [HomeController::class, 'kitchen_empHome'])->name('kitchen_emp.home');
 });
