@@ -12,9 +12,9 @@
                     <i class="fas fa-key"></i> <span>Rooms</span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
                         <li><a href="/admin/Room/allroom">All Rooms</a></li>
-                        <li><a href="/admin/Room/editroom">Edit Rooms</a></li>
+                        <!--<li><a href="/admin/Room/editroom">Edit Rooms</a></li>-->
                         <li><a href="/admin/Room/addroom">Add Rooms</a></li>
-                        <li><a href="/admin/Room/deleteroom">Delete Rooms</a></li>
+                        <!--<li><a href="/admin/Room/deleteroom">Delete Rooms</a></li>-->
                     </ul>
                 </li>
 
