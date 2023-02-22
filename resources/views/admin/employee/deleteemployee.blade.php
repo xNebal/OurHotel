@@ -1,15 +1,21 @@
-
 @extends('layouts.master')
 
 @section('title') 
-ADMIN DASH     
+   DELETE EMPLOYEES 
 @endsection
 
 @section('css')
+
 @endsection
 
 @section('Dashboard')
+
+@endsection
+
+@section('content')
+    
 @endsection
 
 @section('script')
+    
 @endsection

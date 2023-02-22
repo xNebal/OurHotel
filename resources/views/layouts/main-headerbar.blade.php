@@ -80,7 +80,7 @@
 			<div class="user-header">
 				<div class="avatar avatar-sm"> <img src="{{ URL::to('assets/img/profiles/avatar-01.jfif') }}" alt="User Image" class="avatar-img rounded-circle"> </div>
 				<div class="user-text">
-					<h6>hi</h6>
+					<h6>Hello {{Auth::User()->full_name}}</h6>
 					<p class="text-muted mb-0">Administrator</p>
 				</div>
 			</div> <!--<a class="dropdown-item" href="profile.html">My Profile</a>

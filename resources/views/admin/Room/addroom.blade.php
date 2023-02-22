@@ -4,8 +4,6 @@ ADD ROOM
 @endsection
 @section('css')
 @endsection
-@section('Dashboard')
-@endsection
 @section('content')
 <div class="page-wrapper">
     <div class="content container-fluid">
@@ -52,6 +50,7 @@ ADD ROOM
                 <div class="form-group">
                     <label>Room state</label>
                     <select class="form-control" id="state" name="state">
+                    <option>Select</option>
                         <option>available</option>
                         <option>unavailable</option>
                     </select>

@@ -106,6 +106,8 @@ class RoomController extends Controller
         $room->delete();
         return redirect('/admin/Room/allroom')->with('success', 'room Data is successfully deleted');
     }
+
+    
     public function allroom()
     {
         $rooms = Room::all();

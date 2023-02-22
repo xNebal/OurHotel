@@ -1,20 +1,52 @@
 @extends('layouts.master')
-
 @section('title')
 ALL ROOM
 @endsection
-
 @section('css')
-
 @endsection
-
-@section('Dashboard')
-All ROOM
-@endsection
-
 @section('content')
 
-<div class="page-header">
+<body class="d-flex flex-column h-100">
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <h1>List of Rooms</h1>
+            
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Room ID</th>
+                        <th scope="col">Room Type</th>
+                        <th scope="col">Bed Number</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">description</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($rooms as $room )
+                    <tr>
+                        <th scope="row">{{ $room->id }}</th>
+                        <td>{{ $room->type }}</td>
+                        <td>{{ $room->bed_number }}</td>
+                        <td>
+                            <div class="actions"> <a href="#" class="btn btn-sm bg-success-light mr-2">{{ $room->state }}</a> </div>
+                        </td>
+                        <td>{{ $room->price }}</td>
+                        <td>{{ $room->description }}</td>
+                        <td>
+
+                            <a href="{{ route('/admin/Room/editroom', $room->id) }}"><button class="btn btn-outline-primary btn-sm">Edit</button></a>
+                            <a href="{{ route('room.destroy', $room->id) }}"><button class="btn btn-primary btn-sm">Delete</button></a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+<!--<div class="page-header">
     <div class="row align-items-center">
         <div class="col">
             <div class="mt-5">
@@ -32,12 +64,12 @@ All ROOM
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
                         <thead>
                             <tr>
-                                <th>Room ID</th>
-                                <th>Room Type</th>
-                                <th>Bed Number</th>
-                                <th>Status</th>
-                                <th>Price</th>
-                                <th>description</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th class="text-right">Actions</th>
                             </tr>
                         </thead>
@@ -58,7 +90,7 @@ All ROOM
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="{{ route('/admin/Room/editroom', $room->id) }}/"><i class="fas fa-pencil-alt m-r-5"></i>
                                                 Edit</a>
-                                            <a class="dropdown-item" href="{{ route('room.destroy', $room->id) }}" ><i class="fas fa-trash-alt m-r-5"></i>
+                                            <a class="dropdown-item" href="{{ route('room.destroy', $room->id) }}"><i class="fas fa-trash-alt m-r-5"></i>
                                                 Delete</a>
                                         </div>
                                     </div>
@@ -85,11 +117,6 @@ All ROOM
             </div>
         </div>
     </div>-->
-</div>
-</div>
-
 @endsection
-
 @section('script')
-
 @endsection
