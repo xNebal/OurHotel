@@ -21,6 +21,8 @@ ALL client
                         <th scope="col">ID</th>
                         <th scope="col">FULL NAME</th>
                         <th scope="col">EMAIL</th>
+                        <th scope="col">state</th>
+                        <th scope="col">Action</th>
 
                     </tr>
                 </thead>
@@ -30,7 +32,9 @@ ALL client
                         <th scope="row">{{ $clnt->id }}</th>
                         <td>{{ $clnt->full_name }}</td>
                         <td>{{ $clnt->email }}</td>
-
+                        <td>{{ $clnt->state }}</td>
+                        <td><a href="{{ route('/admin/client/showclient', $clnt->id) }}"><button
+                                    class="btn btn-outline-primary btn-sm">Show</button></a></td>
                     </tr>
                     @endforeach
                 </tbody>

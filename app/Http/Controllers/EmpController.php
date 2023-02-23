@@ -56,9 +56,10 @@ class EmpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showemployee($id)
     {
-        //
+        $emp = user::findOrFail($id);
+        return view('/admin/employee/showemployee', compact('emp'));
     }
 
     /**
@@ -85,6 +86,7 @@ class EmpController extends Controller
             'full_name' => 'required',
             'email' => 'required',
             'type' => 'required',
+            'state' => 'required'
         
 
         ]);
@@ -119,8 +121,8 @@ class EmpController extends Controller
     }
 
     public function allclient(){
-        $clnt = user::select('*')->where('type','client');
-        return view('/admin/employee/allemployee', compact('clnt'));
+        $clnt = user::select('*')->where('type','client')->get();
+        return view('/admin/client/allclient', compact('clnt'));
     }
     public function editemployee($id)
     {
@@ -129,4 +131,9 @@ class EmpController extends Controller
     
     }
 
+    public function showclient($id){
+
+        $client = user::findOrFail($id);
+        return view('/admin/client/showclient',compact('client'));
+    }
 }

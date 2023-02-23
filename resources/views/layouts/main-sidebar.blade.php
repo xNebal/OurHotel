@@ -22,17 +22,23 @@
                     <ul class="submenu_class" style="display: none;">
                         <li><a href="/admin/employee/allemployee">All Employees</a></li>
                         <li><a href="/admin/employee/addemployee">Add Employees</a></li>
-                    </ul>
+                    </ul></li>
                 <li class="submenu"> <a href="#">
                         <i class="fas fa-key"></i> <span>Clients</span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
                         <li><a href="/admin/client/allclient">All Clients</a></li>
                     </ul>
                 </li>
+                <li class="submenu"><a href="#">
+                        <i class="fas fa-key"></i> <span>Reports</span> <span class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+                        <li><a href="">Reservations Reports</a></li>
+                        <li><a href="">Employees Reports</a></li>
+                        <li><a href="">Clients Reports</a></li>
+                    </ul></li>
             </ul>
-            </li>
+            
             <!--2-->
-            </ul>
         </div>
     </div>
 </div>

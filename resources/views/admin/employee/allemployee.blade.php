@@ -19,6 +19,7 @@ ALL EMPLOYEES
                         <th scope="col">FULL NAME</th>
                         <th scope="col">EMAIL</th>
                         <th scope="col">TYPE</th>
+                        <th scope="col">STATE</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -29,7 +30,10 @@ ALL EMPLOYEES
                         <td>{{ $emp->full_name }}</td>
                         <td>{{ $emp->email }}</td>
                         <td>{{ $emp->type }}</td>
+                        <td>{{ $emp->state }}</td>
                         <td>
+                        <a href="{{ route('/admin/employee/showemployee', $emp->id) }}"><button
+                                    class="btn btn-outline-primary btn-sm">Show</button></a>
                             <a href="{{ route('/admin/employee/editemployee', $emp->id) }}"><button
                                     class="btn btn-outline-primary btn-sm">Edit</button></a>
                             <a href="{{ route('destroyemp', $emp->id) }}"><button

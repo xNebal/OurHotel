@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('type',[UserType::CLIENT,UserType::ADMIN,UserType::RESERVATION_EMP,UserType::KITCHEN_EMP]);
+            $table->enum('state',['available','unavailable'])->default('available');
             $table->rememberToken();
             $table->timestamps();
         });

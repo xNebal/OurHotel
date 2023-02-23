@@ -74,6 +74,7 @@ Route::middleware(['auth', 'user-access:' . UserType::ADMIN])->group(function ()
     Route::get('/admin/employee/addemployee', [App\Http\Controllers\EmpController::class, 'addemployee'])->name('/admin/employee/addemployee');
     Route::get('/admin/employee/updateemp/{id}', [App\Http\Controllers\EmpController::class, 'editemployee'])->name('/admin/employee/editemployee');
     Route::get('/admin/employee/deleteemployee', [App\Http\Controllers\EmpController::class, 'deleteemployee'])->name('/admin/employee/deleteemployee');
+    Route::get('/admin/employee/showemployee/{id}',[App\Http\Controllers\EmpController::class, 'showemployee'])->name('/admin/employee/showemployee');
     //Route::resource('/admin/employee/allemployee', EmpController::class);
     Route::post('/storeemp', [EmpController::class, 'storeemp']);
     Route::PATCH('/updateemp/{id}', [EmpController::class, 'updateemp'])->name('updateemp');
@@ -82,6 +83,7 @@ Route::middleware(['auth', 'user-access:' . UserType::ADMIN])->group(function ()
 
     /*-------client-------- */
     Route::get('/admin/client/allclient', [App\Http\Controllers\EmpController::class, 'allclient'])->name('/admin/client/allclient');
+    Route::get('/admin/client/showclient/{id}',[App\Http\Controllers\EmpController::class, 'showclient'])->name('/admin/client/showclient');
 
 
 });
