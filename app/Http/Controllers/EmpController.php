@@ -124,6 +124,7 @@ class EmpController extends Controller
         $clnt = user::select('*')->where('type','client')->get();
         return view('/admin/client/allclient', compact('clnt'));
     }
+    
     public function editemployee($id)
     {
         $emp = user::findOrFail($id);

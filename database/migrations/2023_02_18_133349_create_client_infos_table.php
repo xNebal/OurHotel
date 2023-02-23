@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('client_infos', function (Blueprint $table) {
             $table->foreignId('client_id')->constrained('users', 'id');
-            
             $table->string('national_id');
             $table->string('nationality');
             $table->string('phone_number');
