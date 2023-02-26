@@ -61,7 +61,7 @@ $email =$input['email'];
                 return redirect()->route('/kitchen_emp/home');
             }
             else{
-                return redirect()->route('home');
+                return redirect()->route('welcome');
             }
         }else{
             return redirect()->route('login')

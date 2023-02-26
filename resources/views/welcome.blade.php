@@ -45,53 +45,35 @@
                             <a class="nav-link" href="booknow"><span>Book Now</span></a>
                         </li>
                         @guest
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
-                        </li>
-                        @endif
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @endif
 
-
-                        @if ('Auth::user()->type' == 'client')
-                        <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="myreservation">My Reservation</a>
-                            <a class="dropdown-item" href="myorders">My Orders</a>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->fullname }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="logout">logout</a>
-                                    <form id="logout-form" action="logout" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        </div>
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
                         @endif
                         @else
-                        <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->fullname }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="logout">logout</a>
-                                    <form id="logout-form" action="logout" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        </div>
-                        @endguest
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->fullname }}
+                            </a>
 
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="logout">
+                                    logout
+                                </a>
+
+                                <form id="logout-form" action="logout" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @endguest
                     </ul>
 
                 </div>

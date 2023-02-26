@@ -122,101 +122,31 @@
 
     <section class="site-section">
         <div class="container">
+        <h1>Reservation Info</h1>
+            <h4>Reservation:</h4>
+            <p>{{ $res->res_id }}</p>
+            <h4>Room id</h4>
+            <p>{{$res->room_id}}</p>
+            <h4>Reservation from:</h4>
+            <p>{{ $res->from }}</p>
+            <h4>Reservation to:</h4>
+            <p>{{ $res->to }}</p>
+            <h4>Reservation State:</h4>
+            <p>{{ $res->state }}</p>
             @guest
-            @if (Route::has('register'))
-            <p><br>If you Don't Have Account, You can <a class="link" href="{{ route('register') }}">Register</a> here.
-            </p><br>
+            @if( 'Bill::findOrFail($res_id)' == true )
+            <form action="{{ route('/reservation_emp/bills/bill', $res->res_id ) }}" method="get">
+                <button type="submit" class="btn btn-primary">show bill</button>
+            </form>
             @endif
-            @if (Route::has('login'))
-            <p><br>Or you can Login your account <a class="link" href="{{ route('login') }}">login</a></p>
-            @endif
-            @else<div class="row">
-                <div class="col-md-6">
-                    <h2 class="mb-5">Reservation Form</h2>
-                    
-                        <form action="/booknoww" method="post">
-                            {!! csrf_field() !!}
-                            <label>FROM DATE</label>
-                            <input type="date" name="from" id="txtDate" class="form-control"
-                                min="<?php echo date("Y-m-d"); ?>">
-                            </br>
-                            <label>TO DATE</label>
-                            <input type="date" name="to" id="to" class="form-control"
-                                min="<?php echo date("Y-m-d"); ?>">
-                            </br>
-                            <input type="submit" value="Next" class="btn btn-success"></br>
-                        </form>
+            @else
+            <form action="{{ route('/reservation_emp/bills/addbill', $res->res_id ) }}" method="get">
+                <button type="submit" class="btn btn-primary">show bill</button>
+            </form>
 
-                        <!--<div class="row">
-                            <div class="col-sm-6 form-group">
-
-                                <label for="">Arrival Date</label>
-                                <div style="position: relative;">
-                                    <span class="fa fa-calendar icon"
-                                        style="position: absolute; right: 10px; top: 10px;"></span>
-                                    <input type='text' class="form-control" id='arrival_date' />
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 form-group">
-
-                                <label for="">Departure Date</label>
-                                <div style="position: relative;">
-                                    <span class="fa fa-calendar icon"
-                                        style="position: absolute; right: 10px; top: 10px;"></span>
-                                    <input type='text' class="form-control" id='departure_date' />
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="room">Room</label>
-                                <select name="" id="room" class="form-control">
-                                    <option value="">1 Room</option>
-                                    <option value="">2 Rooms</option>
-                                    <option value="">3 Rooms</option>
-                                    <option value="">4 Rooms</option>
-                                    <option value="">5 Rooms</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-6 form-group">
-                                <label for="room">Guests</label>
-                                <select name="" id="room" class="form-control">
-                                    <option value="">1 Guest</option>
-                                    <option value="">2 Guests</option>
-                                    <option value="">3 Guests</option>
-                                    <option value="">4 Guests</option>
-                                    <option value="">5+ Guests</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" class="form-control ">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label for="message">Write a Note</label>
-                                <textarea name="message" id="message" class="form-control " cols="30"
-                                    rows="8"></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <input type="submit" value="Reserve Now" class="btn btn-primary">
-                            </div>
-                        </div>-->
-                    </form>
-                </div>
-            </div>
             @endguest
 
+        </div>
         </div>
     </section>
     <!-- END section -->

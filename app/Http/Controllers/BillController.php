@@ -60,7 +60,7 @@ class BillController extends Controller
         ]);
 
         return view('/reservation_emp/bills/bill' , compact('bill'));
-history::create(['msg'=>"{{ Auth::user()->email }} .has made a bill",'type'=>'madebill']);
+history::create(['msg'=>"{{ Auth::user()->email }} .has made a bill",'type'=>'bill']);
     }
 
     /**
@@ -108,7 +108,7 @@ history::create(['msg'=>"{{ Auth::user()->email }} .has made a bill",'type'=>'ma
         ]);
         bill::whereId($id)->update($validatedData);
         return redirect()->route('/reservation_emp/bills/allbill')->with('success', 'bill Data is successfully updated');
-history::create(['msg'=>"{{ Auth::user()->email }} .has edited a bill",'type'=>'editbill']);
+history::create(['msg'=>"{{ Auth::user()->email }} .has edited a bill",'type'=>'bill']);
    
     }
 

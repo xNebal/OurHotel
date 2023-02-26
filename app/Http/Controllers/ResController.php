@@ -46,7 +46,7 @@ class ResController extends Controller
             'state' => $request['state'],
             'reservationist' => $request['reservationist'],
         ]);
-history::create(['msg'=>"{{ Auth::user()->email }} .has made a res",'type'=>'maderes']);
+history::create(['msg'=>"{{ Auth::user()->email }} .has made a res",'type'=>'res']);
         
         return view('/reservation_emp/reservation/showres', compact('res'));
     }
@@ -131,6 +131,7 @@ history::create(['msg'=>"{{ Auth::user()->email }} .has made a res",'type'=>'mad
          })->get();
         return view('/reservation_emp/reservation/addRR' , compact('rooms') , compact('from','to'));
     }
+
 
     public function all()
     {

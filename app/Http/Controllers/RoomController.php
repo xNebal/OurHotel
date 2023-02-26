@@ -48,7 +48,7 @@ class RoomController extends Controller
             'img' => $request['img'],
 
         ]);
-        history::create(['msg'=>"{{ Auth::user()->email }} .has made a room",'type'=>'makeroom']);
+        history::create(['msg'=>"{{ Auth::user()->email }} .has made a room",'type'=>'room']);
 
         return redirect()->route('/admin/Room/allroom');
     }
@@ -94,7 +94,7 @@ class RoomController extends Controller
 
         ]);
         room::whereId($id)->update($validatedData);
-        history::create(['msg'=>"{{ Auth::user()->email }} .has edited a room",'type'=>'editroom']);
+        history::create(['msg'=>"{{ Auth::user()->email }} .has edited a room",'type'=>'room']);
 
 
         return redirect()->route('/admin/Room/allroom')->with('success', 'room Data is successfully updated');
@@ -110,7 +110,7 @@ class RoomController extends Controller
     {
         $room = Room::findOrFail($id);
         $room->delete();
-        history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a room",'type'=>'deleteroom']);
+        history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a room",'type'=>'room']);
 
         return redirect('/admin/Room/allroom')->with('success', 'room Data is successfully deleted');
     }

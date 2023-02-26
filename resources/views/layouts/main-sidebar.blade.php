@@ -32,9 +32,9 @@
                 <li class="submenu"><a href="#">
                         <i class="fas fa-key"></i> <span>Reports</span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                        <li><a href="">Reservations Reports</a></li>
-                        <li><a href="">Employees Reports</a></li>
-                        <li><a href="">Clients Reports</a></li>
+                        <li><a href="/admin/reports/res">Reservations Reports</a></li>
+                        <li><a href="/admin/reports/emp">Employees Reports</a></li>
+                        <li><a href="/admin/reports/client">Clients Reports</a></li>
                     </ul></li>
             </ul>
             

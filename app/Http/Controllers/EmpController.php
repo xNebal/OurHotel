@@ -49,7 +49,7 @@ class EmpController extends Controller
 
         return redirect()->route('/admin/employee/allemployee')
             ->with('Email-Address ADDED.');
-history::create(['msg'=>"{{ Auth::user()->email }} .has made a emp",'type'=>'madeemp']);
+history::create(['msg'=>"{{ Auth::user()->email }} .has made a emp",'type'=>'emp']);
 
     }
 
@@ -94,7 +94,7 @@ history::create(['msg'=>"{{ Auth::user()->email }} .has made a emp",'type'=>'mad
 
         ]);
         user::whereId($id)->update($validatedData);
-history::create(['msg'=>"{{ Auth::user()->email }} .has edited a emp",'type'=>'editemp']);
+history::create(['msg'=>"{{ Auth::user()->email }} .has edited a emp",'type'=>'emp']);
 
         return redirect()->route('/admin/employee/allemployee')->with('success', 'employee Data is successfully updated');
     }
@@ -109,7 +109,7 @@ history::create(['msg'=>"{{ Auth::user()->email }} .has edited a emp",'type'=>'e
     {
         $emp = user::findOrFail($id);
         $emp->delete();
-history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a emp",'type'=>'deleteemp']);
+history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a emp",'type'=>'emp']);
 
         return redirect('/admin/employee/allemployee')->with('success', 'employee Data is successfully deleted');
     }
@@ -142,4 +142,9 @@ history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a emp",'type'=>'
         $client = user::findOrFail($id);
         return view('/admin/client/showclient',compact('client'));
     }
+
+    public function client(){$client = history::select('*')->where('type','register'); return view('/admin/reports/client', compact('client')); }
+    public function emp(){$emp = history::select('*')->where('type','emp'); return view('/admin/reports/emp', compact('emp'));}
+    public function res(){$res = history::select('*')->where('type','res'); return view('/admin/reports/res', compact('res'));}
+
 }

@@ -9,7 +9,10 @@ use App\Http\Controllers\RoomController;
 use App\UserType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\reservation;
+use Illuminate\Http\Request;
+use App\Models\Room;
+use App\Models\history;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +33,7 @@ Route::get('booknow', function () {return view('booknow');});
 Route::get('contact', function () {return view('contact');});
 //Route::get('rooms', function () {return view('rooms');});
 Route::get('rooms', [App\Http\Controllers\RoomController::class, 'allroomsview'])->name('rooms');
+
 
 
 Auth::routes();
@@ -55,6 +59,27 @@ Route::middleware(['auth', 'user-access:' . UserType::CLIENT])->group(function (
 
     Route::get('welcome', function () {return view('welcome');});
     Route::get('home', function () {return view('welcome');});
+    Route::get('/booknow', function () {return view('/booknow');});
+    Route::post('/booknoww', function (Request $request) {$from = $request->input('from');
+        $to = $request->input('to');
+        $rooms = Room::whereNotIn('id', function($query) use ($from, $to) {
+            $query->from('reservations')
+             ->select('room_id')
+             ->where('state', 'Confirmed')
+             ->where('from', '<=', $to)
+             ->where('to', '>=', $from);
+         })->get();
+        return view('/booknoww' , compact('rooms') , compact('from','to'));});
+        Route::post('/cstoreres', function (Request $request) {$res = reservation::create([
+            'room_id' => $request['room_id'],
+            'from' => $request['from'],
+            'to' => $request['to'],
+            'state' => $request['state'],
+            'reservationist' => $request['reservationist'],
+        ]);
+        history::create(['msg'=>"{{ Auth::user()->email }} .has made a res",'type'=>'res']);
+        return view('/showresc', compact('res'));});
+
 });
 
 /*------------------------------------------
@@ -95,6 +120,10 @@ Route::middleware(['auth', 'user-access:' . UserType::ADMIN])->group(function ()
     Route::get('/admin/client/allclient', [App\Http\Controllers\EmpController::class, 'allclient'])->name('/admin/client/allclient');
     Route::get('/admin/client/showclient/{id}',[App\Http\Controllers\EmpController::class, 'showclient'])->name('/admin/client/showclient');
 
+
+    Route::get('/admin/reports/client',[App\Http\Controllers\EmpController::class, 'client'])->name('/admin/reports/client');
+    Route::get('/admin/reports/emp',[App\Http\Controllers\EmpController::class, 'emp'])->name('/admin/reports/emp');
+    Route::get('/admin/reports/res',[App\Http\Controllers\EmpController::class, 'res'])->name('/admin/reports/res');
 
 });
 
