@@ -35,7 +35,7 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeroom(Request $request)
     {
         Room::create([
             'price' => $request['price'],
@@ -43,6 +43,7 @@ class RoomController extends Controller
             'description' => $request['description'],
             'bed_number' => $request['bed_number'],
             'state' => $request['state'],
+            'img' => $request['img'],
 
         ]);
         return redirect()->route('/admin/Room/allroom');
@@ -114,7 +115,12 @@ class RoomController extends Controller
         return view('/admin/Room/allroom', compact('rooms'));
         //dd('ok');
     }
-
+    public function allroomsview()
+    {
+        $rooms = Room::all();
+        return view('rooms', compact('rooms'));
+        //dd('ok');
+    }
     // add room
     public function addroom()
     {

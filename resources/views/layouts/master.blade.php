@@ -12,13 +12,16 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="home" class="logo"> <span class="logoclass">Hotel de Luna</span> </a>
+                <a href="home" class="logo"> <span class="logoclass">Hotel del Luna</span> </a>
                 <a href="home" class="logo logo-small"> <img src="{{ URL::to('assets/img/hotel_logo.jfif') }}"
                         alt="Logo" width="30" height="30"> </a>
             </div>
+
             @include('layouts.main-headerbar')
+
         </div>
         @include('layouts.main-sidebar')
+
         <div class="page-wrapper">
             <div class="content container-fluid">
                 <div class="page-header">

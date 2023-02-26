@@ -5,8 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+            <img src="{{ URL::to('assets/img/moonlog.png') }}" alt="moonlog" class="logo" width="30%" style="margin-left: 36%; margin-top:3%;">
                 <div class="card-body">
                     <form method="POST" action="/create">
                         @csrf

@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id('bill_id');
             $table->foreignId('res_id')->constrained('reservations', 'res_id');
-            $table->date('bill_date');
-            $table->string('state');
-            $table->string('payment_type');
+            $table->enum('state',['Open','Closed']);
+            $table->enum('payment_type',['Cash','Credit']);
             $table->string('total');
             $table->timestamps();
         });

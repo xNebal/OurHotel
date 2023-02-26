@@ -91,8 +91,6 @@ class EmpController extends Controller
 
         ]);
         user::whereId($id)->update($validatedData);
-
-
         return redirect()->route('/admin/employee/allemployee')->with('success', 'employee Data is successfully updated');
     }
 

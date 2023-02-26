@@ -10,10 +10,10 @@ class bill extends Model
     use HasFactory;
     protected $fillable = [
         'res_id',
-        'bill_date',
         'state',
         'payment_type',
         'total',
+    
     ];
 
     public function reservation()

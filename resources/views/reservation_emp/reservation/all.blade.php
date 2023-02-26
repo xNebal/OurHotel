@@ -1,7 +1,7 @@
-@extends('reservation_emp.layouts.master')
+@extends('layouts.emp')
 
-@section('title') 
-   ALL RESERVATION
+@section('title')
+ALL RESERVATION
 @endsection
 
 @section('css')
@@ -11,78 +11,45 @@
 @endsection
 
 @section('content')
-<body class="d-flex flex-column h-100">
-    
-   <div class="container pt-4 pb-4">
-       <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-           <a class="navbar-brand" href="#">Employee RESERVATION</a>
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-           </button>
-   
-           <div class="collapse navbar-collapse" id="navbarsExample09">
-               <ul class="navbar-nav mr-auto">
-                   <li class="nav-item active">
-                       <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
-                   </li>
-                   <li class="nav-item">
-                       <a class="nav-link" href="">ADD RESERVATION</a>
-                   </li>
-               </ul>
-               <form class="form-inline my-2 my-md-0">
-               <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-               </form>
-           </div>
-       </nav>
-   </div>
-       
-   <main role="main" class="flex-shrink-0">
-       <div class="container">
-           <h1>List of Rseservation</h1>
-           <table class="table table-striped table-hover">
-               <thead>
-                   <tr>
-                   <th scope="col">ID</th>
-                   <th scope="col">ROOM ID</th>
-                   <th scope="col">FROM DATE</th>
-                   <th scope="col">TO DATE</th>
-                   <th scope="col">STATUS</th>
-                   <th scope="col">RESERVATIONIST</th>
-                   <th scope="col">Action</th>
-                   </tr>
-               </thead>
-               <tbody>
-                   <tr>
-                   <th scope="row">1</th>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td>
-                       <a href=""><button class="btn btn-primary btn-sm">View</button></a>
-                       <a href=""><button class="btn btn-outline-primary btn-sm">Edit</button></a>
-                       <button class="btn btn-sm">Delete</button>
-                   </td>
-                   </tr>
-                   <tr>
-                   <th scope="row">2</th>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td>
-                       <a href=""><button class="btn btn-primary btn-sm">View</button></a>
-                       <a href=""><button class="btn btn-outline-primary btn-sm">Edit</button></a>
-                       <button class="btn btn-sm">Delete</button>
-                   </td>
-                   </tr>
-               </tbody>
-           </table>
-       </div> 
-@endsection
 
-@section('script')
-    
-@endsection
+<body class="d-flex flex-column h-100">
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <h1>List of Rseservation</h1>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Reservation ID</th>
+                        <th scope="col">Room ID</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Reservation State</th>
+                        <th scope="col">Reservationist</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($ress as $res)
+                    <tr>
+                        <th scope="row">{{$res->res_id}}</th>
+                        <td>{{$res->room_id}}</td>
+                        <td>{{$res->from}}</td>
+                        <td>{{$res->to}}</td>
+                        <td>{{$res->state}}</td>
+                        <td>{{ $res->reservationist }}</td>
+                        <td>
+                            <a href="{{ route('/reservation_emp/reservation/showres', $res->res_id) }}"><button class="btn btn-primary btn-sm">View</button></a>
+                            <a href="{{ route('/reservation_emp/reservation/edit', $res->res_id) }}"><button class="btn btn-outline-primary btn-sm">Edit</button></a>
+                            <a href="{{ route('/reservation_emp/reservation/delete', $res->res_id) }}"><button class="btn btn-primary btn-sm">Delete</button></a>
+
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endsection
+
+        @section('script')
+
+        @endsection

@@ -16,6 +16,7 @@ class Room extends Model
         'description',
         'bed_number',
         'state',
+        'img'
     ];
 
     public function reservations()

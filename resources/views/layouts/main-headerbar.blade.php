@@ -75,20 +75,18 @@
         </div>
     </li>-->
 	<li class="nav-item dropdown has-arrow">
-		<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="{{ URL::to('assets/img/profiles/avatar-01.jfif') }}" width="31" alt="hala alshater"></span> </a>
+		<a href="/home" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="{{ URL::to('assets/img/moonlog.png') }}" width="61" alt="moon"></span> </a>
 		<div class="dropdown-menu">
 			<div class="user-header">
-				<div class="avatar avatar-sm"> <img src="{{ URL::to('assets/img/profiles/avatar-01.jfif') }}" alt="User Image" class="avatar-img rounded-circle"> </div>
+				<div class="avatar avatar-sm"> <img src="{{ URL::to('assets/img/moonlog.png') }}" alt="User Image" class="avatar-img rounded-circle"> </div>
 				<div class="user-text">
 					<h6>Hello {{Auth::User()->full_name}}</h6>
-					<p class="text-muted mb-0">Administrator</p>
+					<p class="text-muted mb-0">{{Auth::User()->type}}</p>
 				</div>
 			</div> <!--<a class="dropdown-item" href="profile.html">My Profile</a>
 			<a class="dropdown-item" href="settings.html">Account Settings</a>
 			<a class="dropdown-item" href="{{ route('logout') }}">Logout</a>-->
-			<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-				{{ __('Logout') }}
+			<a class="dropdown-item" href="/logout">logout
 			</a>
 		</div>
 	</li>

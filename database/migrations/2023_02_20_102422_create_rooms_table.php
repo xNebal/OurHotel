@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('bed_number',['1','2']);
             $table->enum('state',['available','unavailable']);
             $table->enum('type',['Standard','Suite']);
+            $table->string('img');
             $table->timestamps();
         });
     }

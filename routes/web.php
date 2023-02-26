@@ -1,7 +1,10 @@
 <?php
 use App\Http\Controllers;
 use App\Http\Controllers\EmpController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\RoomController;
 use App\UserType;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +21,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', function () {return view('welcome');});
+Route::get('/home', function () {return view('welcome');});
+
+Route::get('about', function () {return view('about');});
+Route::get('welcome', function () {return view('welcome');});
+Route::get('booknow', function () {return view('booknow');});
+Route::get('contact', function () {return view('contact');});
+//Route::get('rooms', function () {return view('rooms');});
+Route::get('rooms', [App\Http\Controllers\RoomController::class, 'allroomsview'])->name('rooms');
+
 
 Auth::routes();
 
@@ -33,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * Logout Route
      */
-    Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+    Route::get('/logout', [LogoutController::class, 'perform'])->name('logout');
 });
 
 /*------------------------------------------
@@ -43,8 +53,8 @@ All Normal Users Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:' . UserType::CLIENT])->group(function () {
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    
+    Route::get('welcome', function () {return view('welcome');});
+    Route::get('home', function () {return view('welcome');});
 });
 
 /*------------------------------------------
@@ -62,7 +72,7 @@ Route::middleware(['auth', 'user-access:' . UserType::ADMIN])->group(function ()
     Route::get('/admin/Room/editroom/{id}', [App\Http\Controllers\RoomController::class, 'editroom'])->name('/admin/Room/editroom');
     Route::get('/admin/Room/deleteroom', [App\Http\Controllers\RoomController::class, 'deleteroom'])->name('/admin/Room/deleteroom');
     //Route::resource('/admin/Room/allroom', RoomController::class);
-    Route::post('/store', [RoomController::class, 'store']);
+    Route::post('/storeroom', [RoomController::class, 'storeroom']);
     Route::PATCH('/update/{id}', [RoomController::class, 'update'])->name('room.update');
     Route::post('/update/{id}', [RoomController::class, 'update'])->name('room.update');
     Route::get('/{id}/destroy',[RoomController::class, 'destroy'])->name('room.destroy');
@@ -96,6 +106,32 @@ All reservation_emp Routes List
 Route::middleware(['auth', 'user-access:' . UserType::RESERVATION_EMP])->group(function () {
 
     Route::get('/reservation_emp/home', [HomeController::class, 'reservation_empHome'])->name('/reservation_emp/home');
+
+    /*-----reservation----- */
+    Route::get('/reservation_emp/reservation/all', [App\Http\Controllers\ResController::class, 'all'])->name('/reservation_emp/reservation/all');
+    Route::get('/reservation_emp/reservation/add', [App\Http\Controllers\ResController::class, 'add'])->name('/reservation_emp/reservation/add');
+    Route::post('/reservation_emp/reservation/addRR', [App\Http\Controllers\ResController::class, 'addRR'])->name('/reservation_emp/reservation/addRR');
+    Route::get('/reservation_emp/reservation/edit/{res_id}', [App\Http\Controllers\ResController::class, 'edit'])->name('/reservation_emp/reservation/edit');
+    Route::post('/storeres', [ResController::class, 'storeres']);
+    Route::patch('/updateres/{res_id}', [ResController::class, 'updateres'])->name('updateres');
+    Route::POST('/updateres/{res_id}', [ResController::class, 'updateres'])->name('updateres');
+    Route::post('/delete/{res_id}', [ResController::class, 'delete'])->name('res.delete');
+    Route::get('/reservation_emp/reservation/delete/{res_id}', [App\Http\Controllers\ResController::class, 'delete'])->name('/reservation_emp/reservation/delete');
+    Route::get('/reservation_emp/reservation/showres/{res_id}',[App\Http\Controllers\ResController::class, 'showres'])->name('/reservation_emp/reservation/showres');
+    Route::get('/reservation_emp/reservation/showres/{res_id}',[App\Http\Controllers\ResController::class, 'showres'])->name('/reservation_emp/reservation/showres');
+
+
+
+/*-----bills----- */
+Route::get('/reservation_emp/bills/allbill', [App\Http\Controllers\BillController::class, 'allbill'])->name('/reservation_emp/bills/allbill');
+Route::get('/reservation_emp/bills/addbill/{id}', [App\Http\Controllers\BillController::class, 'addBill'])->name('/reservation_emp/bills/addbill');
+Route::get('/reservation_emp/bills/editbill/{id}', [App\Http\Controllers\BillController::class, 'editbill'])->name('/reservation_emp/bills/editbill');
+//Route::resource('/reservation_emp/bills/allroom', BillController::class);
+Route::post('/storebill', [BillController::class, 'storebill']);
+Route::patch('/updatebill/{id}', [BillController::class, 'updatebill'])->name('updatebill');
+Route::POST('/updatebill/{id}', [BillController::class, 'updatebill'])->name('updatebill');
+Route::get('/reservation_emp/bills/bill/{id}',[App\Http\Controllers\BillController::class, 'showbill'])->name('/reservation_emp/bills/bill');
+
 });
 
 /*------------------------------------------
