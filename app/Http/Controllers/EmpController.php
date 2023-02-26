@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use League\CommonMark\Node\Query\OrExpr;
+use App\Models\history;
 
 class EmpController extends Controller
 {
@@ -48,6 +49,8 @@ class EmpController extends Controller
 
         return redirect()->route('/admin/employee/allemployee')
             ->with('Email-Address ADDED.');
+history::create(['msg'=>"{{ Auth::user()->email }} .has made a emp",'type'=>'madeemp']);
+
     }
 
     /**
@@ -91,6 +94,8 @@ class EmpController extends Controller
 
         ]);
         user::whereId($id)->update($validatedData);
+history::create(['msg'=>"{{ Auth::user()->email }} .has edited a emp",'type'=>'editemp']);
+
         return redirect()->route('/admin/employee/allemployee')->with('success', 'employee Data is successfully updated');
     }
 
@@ -104,6 +109,8 @@ class EmpController extends Controller
     {
         $emp = user::findOrFail($id);
         $emp->delete();
+history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a emp",'type'=>'deleteemp']);
+
         return redirect('/admin/employee/allemployee')->with('success', 'employee Data is successfully deleted');
     }
 

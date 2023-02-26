@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\reservation;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\history;
+
 use Illuminate\Support\Facades\DB;
 
 class ResController extends Controller
@@ -44,6 +46,7 @@ class ResController extends Controller
             'state' => $request['state'],
             'reservationist' => $request['reservationist'],
         ]);
+history::create(['msg'=>"{{ Auth::user()->email }} .has made a res",'type'=>'maderes']);
         
         return view('/reservation_emp/reservation/showres', compact('res'));
     }
@@ -70,6 +73,7 @@ class ResController extends Controller
     {
         $res = reservation::findOrFail($res_id);
         $rooms = Room::select('*')->where('state','available')->get();
+
         return view('reservation_emp.reservation.edit', compact('res','rooms'));
     }
 
@@ -88,6 +92,8 @@ class ResController extends Controller
 
         reservation::where('res_id' , '=' , $res_id)->update($validatedData);
         $res = reservation::findOrFail($res_id);
+        history::create(['msg'=>"{{ Auth::user()->email }} .has edited a res",'type'=>'editres']);
+
         return view('/reservation_emp/reservation/showres', compact('res'));
         }
 
@@ -101,6 +107,8 @@ class ResController extends Controller
     {
         $res = reservation::findOrFail($res_id);
         $res->delete();
+        history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a res",'type'=>'deleteres']);
+
         return redirect('reservation_emp/reservation/all')->with('success', 'Res Data is successfully deleted');
     
     }

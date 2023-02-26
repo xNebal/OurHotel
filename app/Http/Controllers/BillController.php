@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\history;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +40,7 @@ class BillController extends Controller
         $days = $interval->format('%a');
         $total = $price * $days;
         return view('/reservation_emp/bills/addbill', compact('res','total'));
+
     }
 
     /**
@@ -49,6 +51,7 @@ class BillController extends Controller
      */
     public function storebill(Request $request)
     {
+
         $bill = bill::create([
             'res_id' => $request['res_id'],
             'state' => $request['state'],
@@ -57,7 +60,7 @@ class BillController extends Controller
         ]);
 
         return view('/reservation_emp/bills/bill' , compact('bill'));
-
+history::create(['msg'=>"{{ Auth::user()->email }} .has made a bill",'type'=>'madebill']);
     }
 
     /**
@@ -105,6 +108,7 @@ class BillController extends Controller
         ]);
         bill::whereId($id)->update($validatedData);
         return redirect()->route('/reservation_emp/bills/allbill')->with('success', 'bill Data is successfully updated');
+history::create(['msg'=>"{{ Auth::user()->email }} .has edited a bill",'type'=>'editbill']);
    
     }
 

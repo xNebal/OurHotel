@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 //use Auth;
+use App\Models\history;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -20,6 +22,7 @@ class LogoutController extends Controller
      */
     public function perform()
     {
+        history::create(['msg'=>"{{ auth()->user()->email }}.has logged in",'type'=>'logout']);
         Session::flush();
         Auth::logout();
         return view('welcome');}

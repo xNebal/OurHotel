@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateRoomRequest;
 use Illuminate\Http\Request;
+use App\Models\history;
+
 use App\Models\Room;
 
 class RoomController extends Controller
@@ -46,6 +48,8 @@ class RoomController extends Controller
             'img' => $request['img'],
 
         ]);
+        history::create(['msg'=>"{{ Auth::user()->email }} .has made a room",'type'=>'makeroom']);
+
         return redirect()->route('/admin/Room/allroom');
     }
 
@@ -90,6 +94,7 @@ class RoomController extends Controller
 
         ]);
         room::whereId($id)->update($validatedData);
+        history::create(['msg'=>"{{ Auth::user()->email }} .has edited a room",'type'=>'editroom']);
 
 
         return redirect()->route('/admin/Room/allroom')->with('success', 'room Data is successfully updated');
@@ -105,6 +110,8 @@ class RoomController extends Controller
     {
         $room = Room::findOrFail($id);
         $room->delete();
+        history::create(['msg'=>"{{ Auth::user()->email }} .has deleted a room",'type'=>'deleteroom']);
+
         return redirect('/admin/Room/allroom')->with('success', 'room Data is successfully deleted');
     }
 

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\history;
+
 
 class RegisterController extends Controller
 {
@@ -70,9 +72,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $email =$data['email'];
 
         return redirect()->route('login')
             ->with('Email-Address ADDED.');
+            history::create(['msg'=>"$email .has a new account",'type'=>'register']);
     }
 
 }

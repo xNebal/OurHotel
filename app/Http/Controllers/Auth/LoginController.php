@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth;
+use App\Models\history;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -41,11 +42,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $input = $request->all();
-
+$email =$input['email'];
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        history::create(['msg'=>"$email .has logged in",'type'=>'login']);
 
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
@@ -68,4 +70,3 @@ class LoginController extends Controller
 
     }
 }
-
